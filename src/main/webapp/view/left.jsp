@@ -4,6 +4,10 @@
 <head>
   <title>侧栏</title>
 </head>
+<style>
+    *{font-size:9px;}
+    option{font-size:13px;}
+</style>
 <script>
     $(function () {
 
@@ -50,7 +54,7 @@
                         <table border="0" width="99%" height="100%" cellspacing="0">
                             <tr height="10"><td colspan="3"></td></tr>
                             <tr>
-                                <td align="right" width="70">关键字：</td>
+                                <td align="right" width="70">关 键 字：</td>
                                 <td colspan="2" width="200"><input type="text" id="keyword" name="keyword"/></td>
                             </tr>
                             <tr>
@@ -65,10 +69,10 @@
                                         <option value="phone">联系电话</option>
                                     </select>
                                 </td>
-                                <td align="center" width="30"><input type="button" value="搜索" onclick="checkForm()"/></td>
+                                <td align="center"><input type="button" value="搜索" onclick="checkForm()"/></td>
                             </tr>
                             <tr>
-                                <td align="right">搜索类型：</td>
+                                <td align="right" >搜索类型：</td>
                                 <td colspan="2">
                                     <input type="radio" name="searchType" id="equal" value="equal" />全字匹配
                                     <input type="radio" checked="checked" name="searchType" id="like" value="like"/>模糊搜索

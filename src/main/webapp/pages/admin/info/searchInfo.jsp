@@ -44,18 +44,17 @@
                             <tr align="center" height="30" bgcolor="#F0F0F0">
                                 <td width="7%"><b>序号</b></td>
                                 <td width="8%"><b>信息ID</b></td>
-                                <td width="35%"><b>信息标题</b></td>
+                                <td width="31%"><b>信息标题</b></td>
                                 <td width="20%"><b>发布时间</b></td>
                                 <td width="8%"><b>付费</b></td>
                                 <td width="8%"><b>审核</b></td>
-                                <td width="14%" colspan="2"><b>操作</b></td>
+                                <td width="18%" colspan="3"><b>操作</b></td>
                             </tr>
                            	<c:forEach var="searchInfo" items="${searchInfoList }" varStatus="status">
                             	<tr height="30" bgcolor="#F9F9F9">
                                      <td align="center"><b>${status.index+1 }</b></td>
                                      <td style="text-indent:10px">${searchInfo.id }</td>
                                      <td style="text-indent:5px">${searchInfo.title }</td>
-                                    <%-- <td align="center">${searchInfo.infoDate }</td>--%>
                                     <td><fmt:formatDate value="${searchInfo.infoDate }" pattern="yyyy-M-d HH:mm:ss" /></td>
                                      <td align="center">
                                      <c:choose>

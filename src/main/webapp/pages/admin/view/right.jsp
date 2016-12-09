@@ -4,6 +4,9 @@
 
 <html>
 <head><title>后台-侧栏</title></head>
+<style>
+
+</style>
 <script>
 
 
@@ -46,14 +49,14 @@
                         <tr>
                             <td align="center" colspan="2">
                                 <fieldset style="height:60px;width:210px">
-                                  <legend>★付费状态</legend>
+                                  <legend style="margin-right: 146px">★付费状态</legend>
                                   <br>
                                   <input id="payfor2" value="1" type="radio"  name="payfor" />已付费
                                   <input id="payfor1" value="0" type="radio"  name="payfor" />未付费
                                   <input id="payfor3" value="2" type="radio"  name="payfor" checked="checked"/>全部
                                 </fieldset>
                                 <fieldset style="height:60px;width:210px">
-                                  <legend>★审核状态</legend>
+                                  <legend style="margin-right: 146px">★审核状态</legend>
                                   <br>
                                   <input id="state1" value="1" type="radio"  name="state" />已审核
                                   <input id="state2" value="0" type="radio"  name="state" />未审核

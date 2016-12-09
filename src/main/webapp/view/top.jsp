@@ -32,7 +32,7 @@
                             <c:otherwise>
                         <table border="0" width="600">
                             <tr align="center">
-                               	    <td width="100"><font><a href="" style="color:white">首&nbsp;&nbsp;&nbsp;&nbsp;页</a></font></td>
+                               	    <td width="100"><font><a href="" style="color:white">首&nbsp;&nbsp;页</a></font></td>
                                 <c:forEach var="infoType" items="${infoTypeList}" varStatus="status">
                                     <td width="100"><a href="/info/get-search-info.do?typeId=${infoType.id}" style="color:white">${infoType.typeName}</a></td>
                                     <c:if test="${status.index==4}">

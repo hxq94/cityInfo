@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
-<head>
+<head >
     <title>发布信息</title>
     <script type="text/javascript">
     	function resetValue(){
@@ -44,10 +44,16 @@
     		}
     	}
     </script>
+    <style>
+        td{border-color:transparent !important;padding:2px 0;}
+        .assign input:not([type=button]),.assign textarea{width:400px;}
+        *{font-size:9px;}
+        option{font-size:13px;}
+    </style>
 </head>
 <body>
     <center>
-    <table border="0" cellpadding="0" cellspacing="0" width="688" height="100%">
+    <table border="0" cellpadding="0" cellspacing="0" width="688" height="100%" class="assign">
         <tr height="20"><td><img src="images/default_t.jpg"></td></tr>
         <tr>
             <td background="images/default_m.jpg" valign="top" align="center">
@@ -75,7 +81,7 @@
                                 </tr>
                                 <tr>
                                     <td style="text-indent:10px" valign="top">信息内容：</td>
-                                    <td align="center"><textarea id="content" name="content" rows="12" cols="60">${info.content }</textarea></td>
+                                    <td><textarea id="content" name="content" rows="12" cols="60">${info.content }</textarea></td>
                                 </tr>
                                 <tr>
                                     <td style="text-indent:10px">联系电话：</td>
