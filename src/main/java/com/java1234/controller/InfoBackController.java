@@ -17,130 +17,135 @@ import java.util.List;
 @Controller
 public class InfoBackController {
 
-	/**
-	 * 信息类别Service
-	 */
-	@Resource
-	private InfoTypeService infoTypeService;
+    /**
+     * 信息类别Service
+     */
+    @Resource
+    private InfoTypeService infoTypeService;
 
-	/**
-	 * 信息Service
-	 */
-	@Resource
-	private InfoService infoService;
+    /**
+     * 信息Service
+     */
+    @Resource
+    private InfoService infoService;
 
     /**
      * 后台按条件查询信息
-	 * @param model
+     *
+     * @param model
      * @param info
      * @return
      */
-	@RequestMapping(value="/info/get-info-list",method = RequestMethod.POST)
-	public String getInfoList(Model model,Info info){
+    @RequestMapping(value = "/info/get-info-list", method = RequestMethod.POST)
+    public String getInfoList(Model model, Info info) {
 
-		List<Info> searchInfoList = infoService.getAllInfoListed(info);
-		model.addAttribute("searchInfoList",searchInfoList);
+        List<Info> searchInfoList = infoService.getAllInfoListed(info);
+        model.addAttribute("searchInfoList", searchInfoList);
 
-		model.addAttribute("mainPage","/pages/admin/info/searchInfo.jsp");
+        model.addAttribute("mainPage", "/pages/admin/info/searchInfo.jsp");
 
-		//准备信息类别
-		List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
-		model.addAttribute("infoTypeList",infoTypeList);
-		return "/pages/admin/view/adminTemp";
-	}
+        //准备信息类别
+        List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
+        model.addAttribute("infoTypeList", infoTypeList);
+        return "/pages/admin/view/adminTemp";
+    }
 
     /**
      * 删除
-	 * @param model
+     *
+     * @param model
      * @param info
      * @param response
      * @return
      * @throws Exception
-	 */
-    @RequestMapping(value="/info/delete-info",method = RequestMethod.POST)
-        public String deleteInfo(Model model, Info info, HttpServletResponse response) throws  Exception{
-            //准备信息类别
-            List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
-            model.addAttribute("infoTypeList",infoTypeList);
+     */
+    @RequestMapping(value = "/info/delete-info", method = RequestMethod.POST)
+    public String deleteInfo(Model model, Info info, HttpServletResponse response) throws Exception {
+        //准备信息类别
+        List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
+        model.addAttribute("infoTypeList", infoTypeList);
 
-            int resultNum =  infoService.deleteInfo(info);
-            boolean delFlag;
-        if(resultNum==1){
+        int resultNum = infoService.deleteInfo(info);
+        boolean delFlag;
+        if (resultNum == 1) {
             delFlag = true;
-        }else {
+        } else {
             delFlag = false;
         }
-        ResponseUtil.write(delFlag,response);
+        ResponseUtil.write(delFlag, response);
         return null;
     }
 
-	/**
+    /**
      * 审核
-	 * @param model
+     *
+     * @param model
      * @param info
      * @param response
      * @return
      * @throws Exception
-	 */
-	@RequestMapping(value="/info/check-info",method = RequestMethod.POST)
-	public String checkInfo(Model model, Info info, HttpServletResponse response) throws  Exception{
-		//准备信息类别
-		List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
-		model.addAttribute("infoTypeList",infoTypeList);
+     */
+    @RequestMapping(value = "/info/check-info", method = RequestMethod.POST)
+    public String checkInfo(Model model, Info info, HttpServletResponse response) throws Exception {
+        //准备信息类别
+        List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
+        model.addAttribute("infoTypeList", infoTypeList);
 
-		int resultNum =  infoService.updateInfo(info);
-		boolean delFlag;
-		if(resultNum==1){
-			delFlag = true;
-		}else {
-			delFlag = false;
-		}
-		ResponseUtil.write(delFlag,response);
-		return null;
-	}
+        int resultNum = infoService.updateInfo(info);
+        boolean delFlag;
+        if (resultNum == 1) {
+            delFlag = true;
+        } else {
+            delFlag = false;
+        }
+        ResponseUtil.write(delFlag, response);
+        return null;
+    }
 
     /**
      * 付费
-	 * @param model
+     *
+     * @param model
      * @param info
      * @param response
      * @return
      * @throws Exception
-	 */
-	@RequestMapping(value="/info/payfor-info",method = RequestMethod.POST)
-	public String payforInfo(Model model, Info info, HttpServletResponse response) throws  Exception{
-		//准备信息类别
-		List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
-		model.addAttribute("infoTypeList",infoTypeList);
+     */
+    @RequestMapping(value = "/info/payfor-info", method = RequestMethod.POST)
+    public String payforInfo(Model model, Info info, HttpServletResponse response) throws Exception {
+        //准备信息类别
+        List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
+        model.addAttribute("infoTypeList", infoTypeList);
 
-		int resultNum =  infoService.updatePayInfo(info);
-		boolean delFlag;
-		if(resultNum==1){
-			delFlag = true;
-		}else {
-			delFlag = false;
-		}
-		ResponseUtil.write(delFlag,response);
-		return null;
-	}
+        int resultNum = infoService.updatePayInfo(info);
+        boolean delFlag;
+        if (resultNum == 1) {
+            delFlag = true;
+        } else {
+            delFlag = false;
+        }
+        ResponseUtil.write(delFlag, response);
+        return null;
+    }
 
     /**
      * 进入审核、付费界面
-	 * @param model
+     *
+     * @param model
      * @param info
      * @return
      * @throws Exception
-	 */
-    @RequestMapping(value="/info/check-info")
-    public String checkInfo(Model model, Info info) throws  Exception{
+     */
+    @RequestMapping(value = "/info/check-info")
+    public String checkInfo(Model model, Info info) throws Exception {
         //准备信息类别
         List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
-        model.addAttribute("infoTypeList",infoTypeList);
+        model.addAttribute("infoTypeList", infoTypeList);
 
         //准备信息数据
         info = infoService.getInfoById(info.getId());
-        model.addAttribute("info",info);
-		model.addAttribute("mainPage","/pages/admin/info/checkInfo.jsp");
+        model.addAttribute("info", info);
+        model.addAttribute("mainPage", "/pages/admin/info/checkInfo.jsp");
         return "/pages/admin/view/adminTemp";
     }
 

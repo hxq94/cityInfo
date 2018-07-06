@@ -44,12 +44,12 @@ public class InfoServiceImpl implements InfoService {
 
     @Override
     public List<Info> getAllInfoListed(Info info) {
-       return infoDao.getAllInfoListed(info);
+        return infoDao.getAllInfoListed(info);
     }
 
     @Override
     public int deleteInfo(Info info) {
-        return  infoDao.deleteInfo(info);
+        return infoDao.deleteInfo(info);
     }
 
     @Override

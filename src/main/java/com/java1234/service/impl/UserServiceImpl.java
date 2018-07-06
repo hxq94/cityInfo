@@ -9,14 +9,14 @@ import com.java1234.entity.User;
 import com.java1234.service.UserService;
 
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-	@Resource
-	private UserDao userDao;
-	
-	@Override
-	public User login(User user) {
-		return userDao.login(user);
-	}
+    @Resource
+    private UserDao userDao;
+
+    @Override
+    public User login(User user) {
+        return userDao.login(user);
+    }
 
 }

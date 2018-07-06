@@ -8,18 +8,21 @@ public interface InfoService {
 
     /**
      * 缴费信息列表
+     *
      * @return
      */
-	List<Info> getPayInfoList();
+    List<Info> getPayInfoList();
 
     /**
      * 获取免费信息列表
+     *
      * @return
      */
     List<Info> getFreeInfoList(int infoTypeId);
 
     /**
      * 根据信息Id获取详细信息
+     *
      * @param id
      * @return
      */
@@ -27,6 +30,7 @@ public interface InfoService {
 
     /**
      * 根据查询条件得到所有的信息
+     *
      * @param info
      * @return
      */
@@ -34,13 +38,14 @@ public interface InfoService {
 
     /**
      * 发布信息
+     *
      * @param info
      */
     void saveInfo(Info info);
 
     List<Info> getAllInfoListed(Info info);
 
-     int deleteInfo(Info info);
+    int deleteInfo(Info info);
 
     int updateInfo(Info info);
 

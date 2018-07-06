@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface InfoTypeService {
 
-	List<InfoType> getInfoTypeList();
+    List<InfoType> getInfoTypeList();
 }

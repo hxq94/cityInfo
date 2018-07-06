@@ -1,137 +1,138 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java1234.dao.InfoDao">
 
-	<resultMap type="Info" id="BaseResultMap">
-		<result property="id" column="id"/>
-		<result property="typeId" column="typeId"/>
-		<result property="title" column="title"/>
-		<result property="content" column="content"/>
-		<result property="linkMan" column="linkman"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
-		<result property="infoDate" column="infoDate"/>
-		<result property="state" column="state"/>
-		<result property="payfor" column="payfor"/>
+    <resultMap type="Info" id="BaseResultMap">
+        <result property="id" column="id"/>
+        <result property="typeId" column="typeId"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="linkMan" column="linkman"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="infoDate" column="infoDate"/>
+        <result property="state" column="state"/>
+        <result property="payfor" column="payfor"/>
 
-		<association property="infoType" resultMap="infoTypeResultMap"/>
-	</resultMap>
+        <association property="infoType" resultMap="infoTypeResultMap"/>
+    </resultMap>
 
-	<resultMap type="InfoType" id="infoTypeResultMap">
-		<result property="id" column="id"/>
-		<result property="typeSign" column="typeSign"/>
-		<result property="typeName" column="typeName"/>
-	</resultMap>
+    <resultMap type="InfoType" id="infoTypeResultMap">
+        <result property="id" column="id"/>
+        <result property="typeSign" column="typeSign"/>
+        <result property="typeName" column="typeName"/>
+    </resultMap>
 
-	<select id="getPayInfoList"  resultMap="BaseResultMap">
-		SELECT * FROM
-		t_info i INNER JOIN t_infotype it
-		ON it.id = i.typeId
-		<where>
-			i.state = 1 AND i.payfor = 1
-		</where>
-		ORDER BY i.infoDate DESC
-	</select>
+    <select id="getPayInfoList" resultMap="BaseResultMap">
+        SELECT * FROM
+        t_info i INNER JOIN t_infotype it
+        ON it.id = i.typeId
+        <where>
+            i.state = 1 AND i.payfor = 1
+        </where>
+        ORDER BY i.infoDate DESC
+    </select>
 
-	<select id="getFreeInfoList"  resultMap="BaseResultMap">
-		SELECT * FROM
-		t_info i INNER JOIN t_infotype it
-		ON it.id = i.typeId
-		<where>
-			i.state = 1 AND i.payfor = 0 AND i.typeId = #{infoTypeId}
-		</where>
-		ORDER BY i.infoDate DESC
-	</select>
+    <select id="getFreeInfoList" resultMap="BaseResultMap">
+        SELECT * FROM
+        t_info i INNER JOIN t_infotype it
+        ON it.id = i.typeId
+        <where>
+            i.state = 1 AND i.payfor = 0 AND i.typeId = #{infoTypeId}
+        </where>
+        ORDER BY i.infoDate DESC
+    </select>
 
-	<select id="getInfoById"  resultMap="BaseResultMap">
-		SELECT * FROM
-		t_info i INNER JOIN t_infotype it
-		ON i.typeId = it.id
-		<where>
-		   i.id = #{id}
-		</where>
-		ORDER BY i.infoDate DESC
-	</select>
+    <select id="getInfoById" resultMap="BaseResultMap">
+        SELECT * FROM
+        t_info i INNER JOIN t_infotype it
+        ON i.typeId = it.id
+        <where>
+            i.id = #{id}
+        </where>
+        ORDER BY i.infoDate DESC
+    </select>
 
-	<select id="getAllInfoList"  resultMap="BaseResultMap">
-		SELECT * FROM
-		t_info i INNER JOIN t_infotype it
-		ON i.typeId = it.id
-		<where>
-			i.state = 1
-			<choose>
-				<when test="searchType=='like' and condition=='content'">
-					AND i.content like concat('%',#{keyword},'%')
-				</when>
-				<when test="searchType=='like' and condition=='title'">
-					AND i.title like concat('%',#{keyword},'%')
-				</when>
-				<when test="searchType=='like' and condition=='email'">
-					AND i.email like concat('%',#{keyword},'%')
-				</when>
-				<when test="searchType=='like' and condition=='linkman'">
-					AND i.linkman like concat('%',#{keyword},'%')
-				</when>
-				<when test="searchType=='like' and condition=='phone'">
-					AND i.phone like concat('%',#{keyword},'%')
-				</when>
+    <select id="getAllInfoList" resultMap="BaseResultMap">
+        SELECT * FROM
+        t_info i INNER JOIN t_infotype it
+        ON i.typeId = it.id
+        <where>
+            i.state = 1
+            <choose>
+                <when test="searchType=='like' and condition=='content'">
+                    AND i.content like concat('%',#{keyword},'%')
+                </when>
+                <when test="searchType=='like' and condition=='title'">
+                    AND i.title like concat('%',#{keyword},'%')
+                </when>
+                <when test="searchType=='like' and condition=='email'">
+                    AND i.email like concat('%',#{keyword},'%')
+                </when>
+                <when test="searchType=='like' and condition=='linkman'">
+                    AND i.linkman like concat('%',#{keyword},'%')
+                </when>
+                <when test="searchType=='like' and condition=='phone'">
+                    AND i.phone like concat('%',#{keyword},'%')
+                </when>
 
-				<when test="searchType=='equal' and condition=='content'">
-					AND i.content = #{keyword}
-				</when>
-				<when test="searchType=='equal' and condition=='title'">
-					AND i.title = #{keyword}
-				</when>
-				<when test="searchType=='equal' and condition=='email'">
-					AND i.email = #{keyword}
-				</when>
-				<when test="searchType=='equal' and condition=='linkman'">
-					AND i.linkman = #{keyword}
-				</when>
-				<when test="searchType=='equal' and condition=='phone'">
-					AND i.phone = #{keyword}
-				</when>
-				<when test="typeId!=null">
-					AND i.typeId = #{typeId}
-				</when>
-			</choose>
-		</where>
-		ORDER BY i.infoDate DESC
-	</select>
+                <when test="searchType=='equal' and condition=='content'">
+                    AND i.content = #{keyword}
+                </when>
+                <when test="searchType=='equal' and condition=='title'">
+                    AND i.title = #{keyword}
+                </when>
+                <when test="searchType=='equal' and condition=='email'">
+                    AND i.email = #{keyword}
+                </when>
+                <when test="searchType=='equal' and condition=='linkman'">
+                    AND i.linkman = #{keyword}
+                </when>
+                <when test="searchType=='equal' and condition=='phone'">
+                    AND i.phone = #{keyword}
+                </when>
+                <when test="typeId!=null">
+                    AND i.typeId = #{typeId}
+                </when>
+            </choose>
+        </where>
+        ORDER BY i.infoDate DESC
+    </select>
 
 
-	<select id="getAllInfoListed" resultMap="BaseResultMap">
-		SELECT * FROM
-		t_info i INNER JOIN t_infotype it
-		ON i.typeId = it.id
-		<where>
-			<if test="state!=2">
-				AND i.state = #{state}
-			</if>
-			<if test="payfor!=2">
-				AND payfor = #{payfor}
-			</if>
-			<if test="typeId!=null">
-				AND i.typeId = #{typeId}
-			</if>
-		</where>
-		ORDER BY i.infoDate DESC
-	</select>
+    <select id="getAllInfoListed" resultMap="BaseResultMap">
+        SELECT * FROM
+        t_info i INNER JOIN t_infotype it
+        ON i.typeId = it.id
+        <where>
+            <if test="state!=2">
+                AND i.state = #{state}
+            </if>
+            <if test="payfor!=2">
+                AND payfor = #{payfor}
+            </if>
+            <if test="typeId!=null">
+                AND i.typeId = #{typeId}
+            </if>
+        </where>
+        ORDER BY i.infoDate DESC
+    </select>
 
-	<insert id="saveInfo" parameterType="Info">
-		INSERT INTO t_info(typeId,title,content,phone,linkMan,email,infoDate,state,payfor) VALUES (#{typeId},#{title},#{content},#{phone},#{linkMan},#{email},#{infoDate},#{state},#{payfor})
-	</insert>
+    <insert id="saveInfo" parameterType="Info">
+        INSERT INTO t_info(typeId,title,content,phone,linkMan,email,infoDate,state,payfor) VALUES
+        (#{typeId},#{title},#{content},#{phone},#{linkMan},#{email},#{infoDate},#{state},#{payfor})
+    </insert>
 
     <delete id="deleteInfo" parameterType="Info">
-        DELETE  from t_info  where id = #{delId}
+        DELETE from t_info where id = #{delId}
     </delete>
 
-	<update id="updateInfo" parameterType="Info">
-		UPDATE  t_info t set t.state = 1 where t.id = #{id}
-	</update>
-	<update id="updatePayInfo" parameterType="Info">
-		UPDATE  t_info t set t.payfor = 1 where t.id = #{id}
-	</update>
+    <update id="updateInfo" parameterType="Info">
+        UPDATE t_info t set t.state = 1 where t.id = #{id}
+    </update>
+    <update id="updatePayInfo" parameterType="Info">
+        UPDATE t_info t set t.payfor = 1 where t.id = #{id}
+    </update>
 </mapper> 

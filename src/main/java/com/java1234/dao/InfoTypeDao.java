@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface InfoTypeDao {
 
-	 List<InfoType> getInfoTypeList();
+    List<InfoType> getInfoTypeList();
 }

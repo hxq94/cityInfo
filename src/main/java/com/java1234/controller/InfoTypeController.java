@@ -19,40 +19,40 @@ import java.util.List;
 @Controller
 public class InfoTypeController {
 
-	/**
-	 * 信息类别Service
-	 */
-	@Resource
-	private InfoTypeService infoTypeService;
+    /**
+     * 信息类别Service
+     */
+    @Resource
+    private InfoTypeService infoTypeService;
 
-	/**
-	 * 信息Service
-	 */
-	@Resource
-	private InfoService infoService;
+    /**
+     * 信息Service
+     */
+    @Resource
+    private InfoService infoService;
 
-	@RequestMapping("/index")
-	public String getInfoTypelist(final Model model){
+    @RequestMapping("/index")
+    public String getInfoTypelist(final Model model) {
 
-		//准备信息类别
-		List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
-		model.addAttribute("infoTypeList",infoTypeList);
-		//准备缴费信息
-		List<Info> payInfoList = infoService.getPayInfoList();
-		model.addAttribute("payInfoList",payInfoList);
-		//准备免费信息
-		List allFreeInfoList = new ArrayList();
-		if(infoTypeList!=null && infoTypeList.size()!=0){
-			infoTypeList.parallelStream().forEach(infoType -> {
-				List<Info> infoFreeList = infoService.getFreeInfoList(infoType.getId());
-				allFreeInfoList.add(infoFreeList);
-			});
-		}
-		model.addAttribute("allFreeInfoList",allFreeInfoList);
+        //准备信息类别
+        List<InfoType> infoTypeList = infoTypeService.getInfoTypeList();
+        model.addAttribute("infoTypeList", infoTypeList);
+        //准备缴费信息
+        List<Info> payInfoList = infoService.getPayInfoList();
+        model.addAttribute("payInfoList", payInfoList);
+        //准备免费信息
+        List allFreeInfoList = new ArrayList();
+        if (infoTypeList != null && infoTypeList.size() != 0) {
+            infoTypeList.parallelStream().forEach(infoType -> {
+                List<Info> infoFreeList = infoService.getFreeInfoList(infoType.getId());
+                allFreeInfoList.add(infoFreeList);
+            });
+        }
+        model.addAttribute("allFreeInfoList", allFreeInfoList);
 
-		model.addAttribute("mainPage","");
+        model.addAttribute("mainPage", "");
 
-		return "/view/indexTemp";
-	}
+        return "/view/indexTemp";
+    }
 
 }

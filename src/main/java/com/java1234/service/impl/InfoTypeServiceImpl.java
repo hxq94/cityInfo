@@ -11,11 +11,11 @@ import java.util.List;
 @Service("infoTypeService")
 public class InfoTypeServiceImpl implements InfoTypeService {
 
-	@Resource
-	private InfoTypeDao infoTypeDao;
+    @Resource
+    private InfoTypeDao infoTypeDao;
 
-	@Override
-	public List<InfoType> getInfoTypeList() {
-		return infoTypeDao.getInfoTypeList();
-	}
+    @Override
+    public List<InfoType> getInfoTypeList() {
+        return infoTypeDao.getInfoTypeList();
+    }
 }

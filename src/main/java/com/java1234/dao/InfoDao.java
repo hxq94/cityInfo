@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface InfoDao {
 
-	 List<Info> getPayInfoList();
+    List<Info> getPayInfoList();
 
     List<Info> getFreeInfoList(int infoTypeId);
 
