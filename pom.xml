@@ -97,11 +97,11 @@
             <artifactId>mybatis-paginator</artifactId>
             <version>${mybatis.paginator.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>${pagehelper.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.pagehelper</groupId>-->
+            <!--<artifactId>pagehelper</artifactId>-->
+            <!--<version>${pagehelper.version}</version>-->
+        <!--</dependency>-->
         <!-- MySql -->
         <dependency>
             <groupId>mysql</groupId>
